@@ -1,0 +1,19 @@
+{
+  "name": "echo.io",
+  "version": "0.0.1",
+  "description": "No description",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github/mediumart/echo.io"
+  },
+  "keywords": [
+    "laravel-echo",
+    "socket.io"
+  ],
+  "author": "Mediumart <daprod2009@gmail.com> (https://github.com/mediumart)",
+  "license": "MIT"
+}
