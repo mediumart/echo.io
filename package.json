@@ -4,7 +4,8 @@
   "description": "No description",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "babel src -d dist",
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -14,6 +15,18 @@
     "laravel-echo",
     "socket.io"
   ],
+  "homepage": "http://github/mediumart/echo.io",
   "author": "Mediumart <daprod2009@gmail.com> (https://github.com/mediumart)",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "base64url": "^2.0.0",
+    "debug": "^3.0.1",
+    "glob": "^7.1.2",
+    "ioredis": "^3.1.4",
+    "socket.io": "^2.0.3"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.0"
+  }
 }

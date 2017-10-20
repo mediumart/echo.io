@@ -1,1 +1,1 @@
-console.log('WIP');
+module.exports = require('./dist/manager');
