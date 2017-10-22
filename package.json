@@ -1,8 +1,8 @@
 {
   "name": "echo.io",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A socket.io server implementation for laravel-echo",
-  "main": "index.js",
+  "main": "dist/manager.js",
   "scripts": {
     "build": "babel src -d dist",
     "prepublish": "npm run build"
