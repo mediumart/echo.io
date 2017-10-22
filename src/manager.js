@@ -16,7 +16,7 @@ class Manager {
             redis: 'redis://127.0.0.1:6379'
         };
 
-        this.setOptions(options);
+        this.setOptions(options || {});
     }
 
     /**
