@@ -12,7 +12,7 @@ const crypto = require('crypto');
 const verify = (token, key) => {
     token = token.split('.');
 
-    if (token.length !== 3 || ! validate(key, ...token)) {
+    if (token.length !== 3 || ! key  || ! validate(key, ...token)) {
         return false;
     } 
 
