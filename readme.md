@@ -22,12 +22,14 @@ this can be any random string for now, but the exact same secret key should be c
 ```js
 const Echo = require('echo.io');
 const echo = new Echo({
-    // <[socket.io options](https://github.com/socketio/socket.io/blob/master/docs/API.md#new-serverhttpserver-options)> 
+    // socket.io options <https://github.com/socketio/socket.io/blob/master/docs/API.md#new-serverhttpserver-options)> 
     io: {},
     
-    // <[ioredis options](https://github.com/luin/ioredis/blob/master/API.md#new_Redis)>
+    // ioredis options <https://github.com/luin/ioredis/blob/master/API.md#new_Redis>
     // can be an object, an array of arguments or a string
-    // example: 'redis://127.0.0.1:6379' or [6380, '192.168.100.1', { password: 'password' }] or { path: '/tmp/echo.sock' }
+    // example: 'redis://127.0.0.1:6379' or 
+    //          [6380, '192.168.100.1', { password: 'password' }] or 
+    //          { path: '/tmp/echo.sock' }
     redis: {}, 
 });
 
