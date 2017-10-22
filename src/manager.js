@@ -129,7 +129,11 @@ class Manager {
      * @return {String}
      */
     authKey() {
-        return 'secret';
+        if (arguments.length) {
+            this.authkey = arguments[0];
+        } else {
+            return process.env.AUTH_KEY || this.authkey;
+        }
     }
 
     /**
