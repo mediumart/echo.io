@@ -182,7 +182,9 @@ class Io {
      * @return {void}       
      */
     subscribePresence(userId, channel, socket, status) {
-        this.adapter.subscribePresence(userId, channel, socket, status);
+        if (socket.rooms.indexOf(channel) === -1) {
+            this.adapter.subscribePresence(userId, channel, socket, status);
+        }
     }
 
     /**
@@ -192,7 +194,9 @@ class Io {
      * @param  channel
      */
     unsubscribePresence(socket, channel) {
-        this.adapter.unsubscribePresence(socket, channel);
+        if (socket.rooms.indexOf(channel) > -1) {
+            this.adapter.unsubscribePresence(socket, channel);
+        }
     }
 }
 

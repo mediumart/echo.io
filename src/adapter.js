@@ -16,6 +16,7 @@ class Adapter {
      */
     subscribePresence(userId, channel, socket, status) {
         socket.join(channel, () => {
+            // presence index
             let index = `${userId}-${channel}`;
 
             if (! this.presences.has(index)) {
@@ -28,7 +29,11 @@ class Adapter {
 
             // we need to keep track of the presence's 
             // multiple sockets connections.
-            this.connections.set(socket.id, index);
+            if (! this.connections.has(socket.id)) {
+                this.connections.set(socket.id, [index]);
+            } else {
+                this.connections.get(socket.id).push(index);
+            }
 
             this.presences.get(index).connections += 1;
 
@@ -45,19 +50,32 @@ class Adapter {
      * @param  channel
      */
     unsubscribePresence(socket, channel) {
-        // get socket presence index 
-        let index = this.connections.get(socket.id);
+        // get presence index 
+        let index = this.connections.get(socket.id).find(
+            i => i.includes(channel)
+        );
 
         // get all sockets related to the presence index.
-        let socketsIds = this.getConnections(index);
+        let socketsIds = this.getPresenceSocketsIds(index);
 
-        // all sockets leaves channel
+        // all related sockets should be processed first
         socketsIds.forEach(id => { 
-            this.connections.delete(id);
+            // remove any socket/presence relation reference.
+            let position = this.connections.get(id).indexOf(index);
 
+            if (position > -1) {
+                this.connections.get(id).splice(position, 1);
+            }
+
+            // purge connections map
+            if (! this.connections.get(id).length) {
+                this.connections.delete(id);
+            }
+
+            // destroy socket/channel binding
             let socket = this.io.sockets.connected[id];
 
-            if (socket) socket.leave(channel) ;
+            if (socket) socket.leave(channel);
         });
 
         this.io.dispatchLeaving(
@@ -74,18 +92,21 @@ class Adapter {
      * @param  reason 
      */
     ondisconnecting(socket) {
-        let index;
+        let indexes;
 
-        if ((index = this.connections.get(socket.id))) {
-            let presence = this.presences.get(index);
+        if ((indexes = this.connections.get(socket.id))) {
+            // all related presences should be processed first
+            indexes.forEach(index => {
+                let presence = this.presences.get(index);
 
-            presence.connections -= 1;
+                presence.connections -= 1;
 
-            if (presence.connections > 0) {
-                this.connections.delete(socket.id);
-            } else {
-                this.unsubscribePresence(socket, presence.channel);
-            }
+                if (presence.connections <= 0) {
+                    this.unsubscribePresence(socket, presence.channel);
+                } 
+            });
+            
+            this.connections.delete(socket.id);
         }
     }
 
@@ -116,9 +137,9 @@ class Adapter {
      * 
      * @return {Array}      
      */
-    getConnections(pIndex) {
+    getPresenceSocketsIds(pIndex) {
         return Array.from(this.connections.keys).filter(
-            socketId => this.connections.get(socketId) === pIndex
+            socketId => this.connections.get(socketId).includes(pIndex)
         );
     }
 }
