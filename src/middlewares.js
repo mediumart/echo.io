@@ -14,7 +14,7 @@ const middlewares = [];
 /**
  * Require middleware files.
  */
-glob.sync('./src/middlewares/*.js').forEach(
+glob.sync(__dirname + '/middlewares/*.js').forEach(
     middleware => middlewares.push(
         require(path.resolve(middleware))
     )
