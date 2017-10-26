@@ -163,7 +163,7 @@ class Subscribe {
         }
 
         // JWT authentication.
-        let status = verify(token, this.server.authKey());
+        let status = verify(token, this.server.authkey());
 
         // The channel should also match.
         if (status && (status.channel_name === channel)) {

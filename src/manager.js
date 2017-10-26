@@ -128,7 +128,7 @@ class Manager {
      * 
      * @return {String}
      */
-    authKey() {
+    authkey() {
         if (arguments.length) {
             this.authkey = arguments[0];
         } else {

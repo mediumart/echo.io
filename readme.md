@@ -14,7 +14,7 @@ $ npm install echo.io
 ```
 You will also need to install the others components mentionned above.
 
-Add a secret key, that will be use for authentication, either by defining an environment variable named `AUTH_KEY`(that will be fetched using `process.env.AUTH_KEY`) or just by using the instance function `echo.authKey('<your_secret_key_here>')` before calling `echo.listen()`.
+Add a secret key, that will be use for authentication, either by defining an environment variable named `AUTH_KEY`(that will be fetched using `process.env.AUTH_KEY`) or just by using the instance function `echo.authkey('<your_secret_key_here>')` before calling `echo.listen()`.
 
 this can be any random string for now, but the exact same secret key should be configured for the [php library](https://github.com/mediumart/echo.io-php), on the laravel framework side.
 
