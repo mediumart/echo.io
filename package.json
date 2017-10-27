@@ -9,13 +9,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "http://github/mediumart/echo.io"
+    "url": "https://github.com/mediumart/echo.io"
   },
   "keywords": [
     "laravel-echo",
     "socket.io"
   ],
-  "homepage": "http://github/mediumart/echo.io",
+  "homepage": "https://github.com/mediumart/echo.io",
   "author": "Mediumart <daprod2009@gmail.com> (https://github.com/mediumart)",
   "license": "MIT",
   "dependencies": {
