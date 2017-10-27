@@ -1,6 +1,6 @@
 {
   "name": "echo.io",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "A socket.io server implementation for laravel-echo",
   "main": "dist/manager.js",
   "scripts": {
