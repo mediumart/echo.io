@@ -44,7 +44,7 @@ class ClientEvents {
      * @return {void}       
      */
     onclientmessage(socket, { channel, event, data }) {
-        if (socket.rooms.includes(channel)) {
+        if (socket.rooms && socket.rooms[channel]) {
             this.server.onclientmessage(channel, { socket, event, data: { channel, data } });
         }
     }
